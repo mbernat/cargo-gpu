@@ -284,17 +284,28 @@ impl Install {
     }
 
     fn write_source_files(&self) {
+        const DUMMY_DEPENDENCY_LINE: &str = "spirv-builder = { path = \"../spirv-builder-dummy\" }";
+
         let cli = self.spirv_cli();
         let checkout = cli.cached_checkout_path();
         std::fs::create_dir_all(checkout.join("src")).unwrap();
         for (filename, contents) in SPIRV_BUILDER_FILES.iter() {
             log::debug!("writing {filename}");
+
+            let lines: Vec<_> = contents
+                .lines()
+                .map(|line| {
+                    if line == DUMMY_DEPENDENCY_LINE {
+                        format!("spirv-builder = {}", &cli.dep)
+                    } else {
+                        line.replace("${CHANNEL}", &cli.channel).into()
+                    }
+                })
+                .collect();
+
             let path = checkout.join(filename);
             let mut file = std::fs::File::create(&path).unwrap();
-            let replaced_contents = contents
-                .replace("${SPIRV_BUILDER_SOURCE}", &cli.dep)
-                .replace("${CHANNEL}", &cli.channel);
-            file.write_all(replaced_contents.as_bytes()).unwrap();
+            file.write_all(lines.join("\n").as_bytes()).unwrap();
         }
     }
 
