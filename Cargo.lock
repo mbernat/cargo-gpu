@@ -154,6 +154,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "env_home"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c7f84e12ccf0a7ddc17a6c41c93326024c42920d7ee630d04950e6926645c0fe"
+
+[[package]]
 name = "env_logger"
 version = "0.10.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -383,6 +389,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "87607cb1398ed59d48732e575a4c28a7a8ebf2454b964fe3f224f2afc07909e1"
 dependencies = [
  "serde",
+]
+
+[[package]]
+name = "spirv-builder"
+version = "0.1.0"
+
+[[package]]
+name = "spirv-builder-cli"
+version = "0.1.0"
+dependencies = [
+ "cargo-gpu",
+ "env_home",
+ "env_logger",
+ "log",
+ "serde",
+ "serde_json",
+ "spirv-builder",
+ "toml",
 ]
 
 [[package]]

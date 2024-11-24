@@ -1,10 +1,6 @@
 [workspace]
 members = [
-    "crates/cargo-gpu", 
-]
-
-exclude = [
-    "crates/spirv-builder-cli"
+    "crates/*", 
 ]
 
 resolver = "2"

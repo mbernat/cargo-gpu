@@ -2,7 +2,7 @@
 //! into the main source repo.
 use spirv_builder::{CompileResult, MetadataPrintout, ModuleResult, SpirvBuilder};
 
-use spirv_builder_cli::spirv_builder_cli::{Args, ShaderModule};
+use cargo_gpu::spirv_builder_cli::{Args, ShaderModule};
 
 const RUSTC_NIGHTLY_CHANNEL: &str = "${CHANNEL}";
 
